@@ -13,6 +13,7 @@ import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Donations from './pages/Donations';
+import Standings from './pages/Standings';
 
 const client = new ApolloClient({
   request: operation => {
@@ -38,6 +39,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/standings" component={Standings} />
               <Route exact path="/donations" component={Donations} />
               <Route exact path="/profile/:username?" component={Profile} />
               <Route exact path="/thought/:id" component={SingleThought} />
