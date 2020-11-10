@@ -10,24 +10,24 @@ const resolvers = {
         return User.find()
             .select('-__v -password')
             .populate('friends')
-            // .populate('toughts');
+            .populate('toughts');
       },      
       // get a user by username
       user: async (parent, { username }) => {
         return User.findOne({ username })
         .select('-__v -password')
         .populate('friends')
-        // .populate('thoughts');
+        .populate('thoughts');
       },
-      // thoughts: async (parent, { username }) => {
-      //     // ternary operator to check if username exists
-      //   const params = username ? { username } : {};
-      //   return Thought.find(params).sort({ createdAt: -1 });
-      // },
-      // // we destructure the _id argument value and place it into our .findOne() method to look up a single thought by its _id
-      // thought: async (parent, { _id }) => {
-      //     return Thought.findOne({ _id });
-      // },
+      thoughts: async (parent, { username }) => {
+          // ternary operator to check if username exists
+        const params = username ? { username } : {};
+        return Thought.find(params).sort({ createdAt: -1 });
+      },
+      // we destructure the _id argument value and place it into our .findOne() method to look up a single thought by its _id
+      thought: async (parent, { _id }) => {
+          return Thought.findOne({ _id });
+      },
       me: async (parent, args, context) => {
         if (context.user) {
           const userData = await User.findOne({ _id: context.user._id })
@@ -106,21 +106,21 @@ const resolvers = {
             return { token, user };
 
         },
-        // addThought: async (parent, args, context) => {
-        //     if (context.user) {
-        //       const thought = await Thought.create({ ...args, username: context.user.username });
+        addThought: async (parent, args, context) => {
+            if (context.user) {
+              const thought = await Thought.create({ ...args, username: context.user.username });
           
-        //       await User.findByIdAndUpdate(
-        //         { _id: context.user._id },
-        //         { $push: { thoughts: thought._id } },
-        //         { new: true }
-        //       );
+              await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $push: { thoughts: thought._id } },
+                { new: true }
+              );
           
-        //       return thought;
-        //     }
+              return thought;
+            }
           
-        //     throw new AuthenticationError('You need to be logged in!');
-        // },
+            throw new AuthenticationError('You need to be logged in!');
+        },
         // addReaction: async (parent, { thoughtId, reactionBody }, context) => {
         //     if (context.user) {
         //       const updatedThought = await Thought.findOneAndUpdate(

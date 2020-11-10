@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 const ThoughtList = ({ thoughts, title }) => {
   if (!thoughts.length) {
-    return <h3>No Teams Picked</h3>;
+    return <h3>No Comments Yet
+    </h3>;
   }
 
   return (
