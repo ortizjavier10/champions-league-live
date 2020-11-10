@@ -7,7 +7,7 @@ import React from 'react';
 // 	"port": null,
 // 	"path": "/api/championsleague/table?group=H",
 // 	"headers": {
-// 		"x-rapidapi-key": "4f7cb9b07amshdac9e3deb18b036p16ef7djsn8d936f07a19f",
+// 		"x-rapidapi-key": "",
 // 		"x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com",
 // 		"useQueryString": true
 // 	}
@@ -27,14 +27,13 @@ import React from 'react';
 // });
 
 // req.end();
-// const API_KEY = '4f7cb9b07amshdac9e3deb18b036p16ef7djsn8d936f07a19f';
-// const API_HOST = 'heisenbug-champions-league-live-scores-v1.p.rapidapi.com'
+
 
 const Standings = () => {
     fetch("https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=H", {
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-key": "4f7cb9b07amshdac9e3deb18b036p16ef7djsn8d936f07a19f",
+		"x-rapidapi-key": "",
 		"x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com"
 	}
     })
