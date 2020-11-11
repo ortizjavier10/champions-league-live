@@ -2,3 +2,4 @@ node_modules/
 
 # api KEYS
 .env
+client/src/Config.js

@@ -1,55 +1,51 @@
-import React from 'react';
-// const http = require("https");
-
-// const options = {
-// 	"method": "GET",
-// 	"hostname": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com",
-// 	"port": null,
-// 	"path": "/api/championsleague/table?group=H",
-// 	"headers": {
-// 		"x-rapidapi-key": "",
-// 		"x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com",
-// 		"useQueryString": true
-// 	}
-// };
-
-// const req = http.request(options, function (res) {
-// 	const chunks = [];
-
-// 	res.on("data", function (chunk) {
-// 		chunks.push(chunk);
-// 	});
-
-// 	res.on("end", function () {
-// 		const body = Buffer.concat(chunks);
-// 		console.log(body.toString());
-// 	});
-// });
-
-// req.end();
-
+import { React, useEffect, useState } from 'react';
+import { API_KEY } from '../Config';
+// const searchGroup = document.querySelector("#group-picker");
+// var axios = require("axios").default;
 
 const Standings = () => {
-    fetch("https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=H", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": `${process.env.API_KEY}`,
-		"x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com"
-	}
-    })
-    .then(response => response.json())
-    .then(response => {
-        console.log(response)
-    })
-    .catch(err => {
-        console.error(err);
-    });
 
+    const [groups, setGroups ] = useState([])
+    // const group = document.querySelector("#group-picker").value;
+
+    useEffect(() => {
+
+        const getTeams = async () => {
+            await fetch("https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=A" , {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": `${API_KEY}`,
+                "x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com"
+            }
+            })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(response)
+                const groups = data.map((group) => (
+                    {
+                      name:  group.team,
+                      value: group.team
+                    }));
+                setGroups(groups);
+                
+            })
+
+            .catch(err => {
+                console.error(err);
+            });
+        };
+        getTeams();
+    }, []);
 
     return (
         <div>
             <p>
                 Champions League Standings
+            <table>
+                {groups.map((group) =>{
+                    <MenuItem value={group.value}>{group.name}</MenuItem>
+                })}
+            </table>
             </p>
         </div>
     )
