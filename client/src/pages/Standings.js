@@ -1,14 +1,14 @@
-import { React, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { API_KEY } from '../Config';
-// const searchGroup = document.querySelector("#group-picker");
+
 // var axios = require("axios").default;
 
 const Standings = () => {
 
-    const [groups, setGroups ] = useState([])
-    // const group = document.querySelector("#group-picker").value;
+    // const [groups, setGroups ] = useState([])
+    
 
-    useEffect(() => {
+    // useEffect(() => {
 
         const getTeams = async () => {
             await fetch("https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=A" , {
@@ -18,16 +18,10 @@ const Standings = () => {
                 "x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com"
             }
             })
-            .then(data => data.json())
+            .then(res=> res.json())
             .then((data) => {
                 console.log(data)
-                const groups = data.map((group) => (
-                    {
-                      name:  group.team,
-                      value: group.team
-                    }));
-                setGroups(groups);
-                
+            
             })
 
             .catch(err => {
@@ -35,18 +29,38 @@ const Standings = () => {
             });
         };
         getTeams();
-    }, []);
+    
+    // const apiURL = "https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=A"
+
+    // function fetchStandings() {
+    //     fetch(apiURL)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data)
+    //     })
+    // }
 
     return (
-        <div>
-            <p>
-                Champions League Standings
-            <table>
-                {/* {groups.map((group) =>{
-                    <MenuItem value={group.value}>{group.name}</MenuItem>
-                })} */}
-            </table>
-            </p>
+        <div className="standings">
+            <h1>Champions League Standings</h1>
+            <h2>Click button below to get the latest UCL standings</h2>
+
+            {/* Fetch data from API */}
+            <div>
+                <button className="fetch-button" onClick={getTeams}>Fetch Standings</button>
+            </div>
+
+            <div className="groups">
+                <div className="group">
+                    <h3>Group</h3>
+
+                    <div className="details">
+                        <p>Team: </p>
+                        <p>Matches Played:</p>
+                        <p>Total Points:</p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
