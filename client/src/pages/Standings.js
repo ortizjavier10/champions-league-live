@@ -5,7 +5,7 @@ import { API_KEY } from '../Config';
 
 const Standings = () => {
 
-    // const [groups, setGroups ] = useState([])
+    const [groups, setGroups ] = useState(null);
     
 
     // useEffect(() => {
@@ -19,8 +19,9 @@ const Standings = () => {
             }
             })
             .then(res=> res.json())
-            .then((data) => {
-                console.log(data)
+            .then(data => {
+                console.log(data.records)
+                setGroups(data);
             
             })
 
@@ -28,7 +29,7 @@ const Standings = () => {
                 console.error(err);
             });
         };
-        getTeams();
+        // getTeams();
     
     // const apiURL = "https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=A"
 
@@ -51,15 +52,17 @@ const Standings = () => {
             </div>
 
             <div className="groups">
-                <div className="group">
-                    <h3>Group</h3>
+                {groups && groups.records.map((group, index) => (
+                <div className="group" key={index}>
+                    <h3>Team {index + 1}</h3>
 
                     <div className="details">
-                        <p>Team: </p>
-                        <p>Matches Played:</p>
-                        <p>Total Points:</p>
+                        <h3>{group.team} </h3>
+                        <p>Matches Played:{group.played}</p>
+                        <p>Total Points:{group.points}</p>
                     </div>
                 </div>
+                )) }
             </div>
         </div>
     )
