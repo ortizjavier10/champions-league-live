@@ -17,7 +17,7 @@ const Standings = () => {
             await fetch("https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=A" , {
             "method": "GET",
             "headers": {
-                "x-rapidapi-key": `${process.env.REACT_APP_API_KEY}`,
+                "x-rapidapi-key": "4f7cb9b07amshdac9e3deb18b036p16ef7djsn8d936f07a19f",
                 "x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com"
             }
             })
