@@ -1,7 +1,10 @@
 import React, {useEffect, useState } from 'react';
-import { API_KEY } from '../Config';
+// import { API_KEY } from '../Config';
+require('dotenv').config()
 
 // var axios = require("axios").default;
+// const API_KEY = 
+//     process.env.API_KEY;
 
 const Standings = () => {
 
@@ -14,7 +17,7 @@ const Standings = () => {
             await fetch("https://heisenbug-champions-league-live-scores-v1.p.rapidapi.com/api/championsleague/table?group=A" , {
             "method": "GET",
             "headers": {
-                "x-rapidapi-key": `${API_KEY}`,
+                "x-rapidapi-key": `${process.env.REACT_APP_API_KEY}`,
                 "x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com"
             }
             })

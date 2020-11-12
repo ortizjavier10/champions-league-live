@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ortizjavier10/champions-league-live#readme",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "dotenv": "^8.2.0",
     "if-env": "^1.0.4"
   },
   "devDependencies": {
