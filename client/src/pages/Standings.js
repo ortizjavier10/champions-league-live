@@ -18,9 +18,9 @@ const Standings = () => {
                 "x-rapidapi-host": "heisenbug-champions-league-live-scores-v1.p.rapidapi.com"
             }
             })
-            .then(response => response.json())
+            .then(data => data.json())
             .then((data) => {
-                console.log(response)
+                console.log(data)
                 const groups = data.map((group) => (
                     {
                       name:  group.team,
@@ -42,9 +42,9 @@ const Standings = () => {
             <p>
                 Champions League Standings
             <table>
-                {groups.map((group) =>{
+                {/* {groups.map((group) =>{
                     <MenuItem value={group.value}>{group.name}</MenuItem>
-                })}
+                })} */}
             </table>
             </p>
         </div>
